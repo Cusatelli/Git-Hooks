@@ -4,7 +4,6 @@
 
 - [Introcution](#introcution)
 - [Build \& Deploy](#build--deploy)
-  - [Directory](#directory)
 - [Install](#install)
 - [Usage](#usage)
 - [Maintainers](#maintainers)
@@ -20,8 +19,6 @@ Git Hooks are located in `./.git/hooks/`
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Build & Deploy
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -49,8 +46,6 @@ cd Git-Hooks
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Conventions
-
-# Conventions
 
 Format: `<type>(<scope>): <subject>`
 
