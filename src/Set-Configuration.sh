@@ -22,6 +22,8 @@ print_character_slow() {
 }
 
 set_issue_pattern() {
+	ISSUE_PREFIX=""; # Reset
+
 	clear;
 	echo "What's the issue pattern used by your branches?";
 	echo "Example branch:"
@@ -38,16 +40,16 @@ set_issue_pattern() {
 		substring_after="${input_issue_pattern:start_position}";
 
 		# Concatenate the substrings with the replacement
-		echo "$substring_before";
 		OUTPUT="((${substring_before})*[-]?[_]?[0-9])+";
 
+		PATTERN=[$(git rev-parse --abbrev-ref HEAD | grep -Eo $OUTPUT)];
+		echo "Example Commit Message:"
+		echo "> '$PATTERN This is a new Feature commit message.'";
+		sleep 1;
+
 		clear;
-		read -p "Is the key of the ticket always $substring_before? (yes): " input_always_same_key;
-		if [ "$input_always_same_key" == "no" ]; then
-			OUTPUT="([#]*[\w]*[-]?[_]?[0-9])+";
-		fi
-		clear;
-		read -p "Do you wish to prefix this commit message with the pattern? (yes): " input_prefix_pattern;
+		echo "Do you wish to prefix this pattern $PATTERN commit message with $substring_before?";
+		read -p "New pattern will be [$substring_before${PATTERN:1} (yes): " input_prefix_pattern;
 		if [ "$input_prefix_pattern" != "no" ]; then
 			ISSUE_PREFIX="$substring_before";
 		fi

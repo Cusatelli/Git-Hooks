@@ -28,24 +28,24 @@ echo_loop() {
 	do
 		echo "$1";
 		sleep $2;
-		# clear;
+		clear;
 		echo "$1.";
 		sleep $2;
-		# clear;
+		clear;
 		echo "$1..";
 		sleep $2;
-		# clear;
+		clear;
 		echo "$1...";
 		sleep $2;
-		# clear;
+		clear;
 	done
 }
 
-# clear;
+clear;
 echo "Navigating to $GIT_HOOKS_DIRECTORY directory.";
 cd $GIT_HOOKS_DIRECTORY
 
-# clear;
+clear;
 if [ -e "$FILE_NAME" ]; then
     echo "File: "$FILE_NAME" already exists.";
 	read -p "Would you like to override contents of file? (no): " INPUT_OVERRIDE_CONTENT;
@@ -61,7 +61,7 @@ else
 fi
 
 # Write the bash script to the new file. (To read it replace surrounding quotes and all "\n" with "new lines" in vs-code)
-# clear;
+clear;
 
 # Read the JSON file content
 # Get the directory path of the script
@@ -77,7 +77,6 @@ ISSUE_PREFIX=$(grep -oP '(?<=ISSUE_PREFIX": ")[^"]*' <<< "$settings");
 USE_CONVENTIONAL_COMMITS=$(grep -oP '(?<=USE_CONVENTIONAL_COMMITS": )[^,}]*' <<< "$settings");
 
 echo "$ISSUE_PATTERN $ISSUE_PREFIX $USE_CONVENTIONAL_COMMITS";
-
 echo_loop "Writing bash-script to newly created $FILE_NAME file" $SLEEP_TIME_DOTS "1 2 3";
 SCRIPT='#!/bin/bash
 
@@ -92,8 +91,7 @@ echo "$ISSUE_PATTERN";
 TICKET=[';
 SCRIPT+="$ISSUE_PREFIX";
 SCRIPT+='$(git rev-parse --abbrev-ref HEAD | grep -Eo ';
-SCRIPT+='"'$ISSUE_PATTERN'"';
-SCRIPT+=' | grep -Eo "(\\w+[-])?[0-9]+")];
+SCRIPT+='"'$ISSUE_PATTERN'")];
 STATUS=$(git status --short | grep ^[MARCD]);
 STAGED_STATUS_LOCATION=$(git status --short | grep ^[MARCD]);
 TYPE="";';
@@ -105,27 +103,27 @@ if [[ $TICKET == "[]" || "$MESSAGE" == "$TICKET"* ]]; then
 fi;
 
 if [[ "${STAGED_STATUS_LOCATION:3:6}" == *"tests/"* ]]; then
-	TYPE="test";
+	TYPE=" test";
 elif [[ "${STAGED_STATUS_LOCATION:3:14}" == *"documentation/"* ]]; then
-	TYPE="docs";
+	TYPE=" docs";
 else
 	# Just grab the first staged file and check if refactor, feat, chore, docs etc.
 	# this needs to be refined later, but it will suffice for now:
 	if [[ "${STATUS:0:1}" == "A" ]]; then
-		TYPE="feat";
+		TYPE=" feat";
 	elif [[ "${STATUS:0:1}" == "M" ]]; then
-		TYPE="refactor";
+		TYPE=" refactor";
 	elif [[ "${STATUS:0:1}" == "C" ]]; then
-		TYPE="fix";
+		TYPE=" fix";
 	elif [[ "${STATUS:0:1}" == "R" ]]; then
-		TYPE="chore";
+		TYPE=" chore";
 	fi;
 fi;
 ';
 fi;
 
 SCRIPT+='
-echo "$TICKET $TYPE: $MESSAGE" > $FILE;
+echo "$TICKET$TYPE: $MESSAGE" > $FILE;
 exit 0;
 ';
 
@@ -135,11 +133,11 @@ read -p "Press 'Enter' to continue...";
 
 # Initialize the file so git can use it to prefix git commit messages.
 # If this isn't done it won't do anything.
-# clear;
+clear;
 echo_loop "Initialize file with chmod +x so it can be used to prefix commit messages" $SLEEP_TIME_DOTS "1 2";
 chmod +x ./$FILE_NAME;
 sleep 1;
 
-# clear;
+clear;
 echo "Automatic Issue Tagging has been successfuly enabled for this project!";
 func_exit;
