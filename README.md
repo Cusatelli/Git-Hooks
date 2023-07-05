@@ -4,7 +4,7 @@
 
 ## Table of contents <!-- omit in toc -->
 
-- [Introcution](#introcution)
+- [Introduction](#introduction)
 - [Build \& Deploy](#build--deploy)
 - [Install](#install)
 - [Usage](#usage)
@@ -14,63 +14,83 @@
 - [License](#license)
 - [Contact](#contact)
 
-## Introcution
+## Introduction
 
-Git Hooks are located in `./.git/hooks/`
+The Git-Hooks project aims to provide a solution for automating certain tasks in Git repositories, regardless of the version control system (VCS) platform being used (e.g., GitHub, GitLab, Bitbucket). It focuses on local Git operations and utilizes Git hooks, which are located in the `.git/hooks/` directory.
+
+The main purpose of this project is to enable automatic prefixing of commit messages with the correct branch or ticket number. Additionally, it attempts to add commit types such as `feat`, `refactor`, `fix`, or `chore` based on the first entry of the staged items. The commit message format follows the guidelines of the **Conventional Commits v1.0.0** specification, which can be found at [https://www.conventionalcommits.org/en/v1.0.0/#summary](https://www.conventionalcommits.org/en/v1.0.0/#summary).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Build & Deploy
 
+[To be filled with build and deployment instructions]
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Install
 
-```bash
-git clone git@github.com:Cusatelli/Git-Hooks.git
-cd Git-Hooks
-```
+To install and use the Git-Hooks project, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone git@github.com:Cusatelli/Git-Hooks.git
+   cd Git-Hooks
+   ```
+2. [Additional installation instructions if needed]
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Usage
 
+[Instructions on how to use the Git-Hooks project]
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Maintainers
+
+[To be filled with maintainers' information]
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Contributing
 
-[@Cusatelli](https://github.com/Cusatelli)
+Contributions to the Git-Hooks project are welcome. If you would like to contribute, please contact [@Cusatelli](https://github.com/Cusatelli) for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Conventions
 
-Format: `<type>(<scope>): <subject>`
+The Git-Hooks project follows the Conventional Commits specification for commit message formatting. The general format is as follows:
 
-`<scope>` is optional
+```
+<type>(<scope>): <subject>
+```
 
-- `feat`: (new feature for the user, not a new feature for build script)
-- `fix`: (bug fix for the user, not a fix to a build script)
-- `docs`: (changes to the documentation)
-- `style`: (formatting, missing semi colons, etc; no production code change)
-- `refactor`: (refactoring production code, eg. renaming a variable)
-- `test`: (adding missing tests, refactoring tests; no production code change)
-- `chore`: (updating grunt tasks etc; no production code change)
+The `<scope>` part is optional.
 
-Read more: [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) v1.0.0
+The following commit types are used:
+
+- `feat`: New feature for the user (not a new feature for a build script)
+- `fix`: Bug fix for the user (not a fix to a build script)
+- `docs`: Changes to the documentation
+- `style`: Formatting, missing semicolons, etc. (no production code change)
+- `refactor`: Refactoring production code, e.g., renaming a variable
+- `test`: Adding missing tests, refactoring tests (no production code change)
+- `chore`: Updating grunt tasks, etc. (no production code change)
+
+For more details, please refer to the [Conventional Commits v1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## License
 
+[To be filled with license information]
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Contact
 
-Cusatelli: <a href="mailto:github.cusatelli@gmail.com">github.cusatelli@gmail.com</a>
+For any inquiries or questions, please contact Cusatelli at [github.cusatelli@gmail.com](mailto:github.cusatelli@gmail.com).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
