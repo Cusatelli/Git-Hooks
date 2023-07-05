@@ -72,10 +72,6 @@ To use the Git Hooks solution, follow these steps:
 	<a href="#top" style="font-size:2rem;color:#aac5c0;">▲</a>
 </p>
 
-<p align="right">
-	<a href="#top" style="font-size:2rem;color:#aac5c0;">▲</a>
-</p>
-
 ## Maintainers
 
 [To be filled with maintainers' information]
