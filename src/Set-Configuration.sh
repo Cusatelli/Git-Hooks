@@ -7,7 +7,7 @@
 #!/bin/sh
 IS_DEBUG_MODE=true;
 ISSUE_PREFIX="";
-ISSUE_PATTERN="(\\w+[-_])?[0-9]+";
+ISSUE_PATTERN="([#]*[\w]*[-]?[_]?[0-9])+";
 USE_CONVENTIONAL_COMMITS=false;
 
 print_character_slow() {
@@ -39,12 +39,12 @@ set_issue_pattern() {
 
 		# Concatenate the substrings with the replacement
 		echo "$substring_before";
-		OUTPUT="([${substring_before}]?[0-9])+";
+		OUTPUT="((${substring_before})*[-]?[_]?[0-9])+";
 
 		clear;
 		read -p "Is the key of the ticket always $substring_before? (yes): " input_always_same_key;
 		if [ "$input_always_same_key" == "no" ]; then
-			OUTPUT="(#?[\w\d]*[-_]?[0-9])+";
+			OUTPUT="([#]*[\w]*[-]?[_]?[0-9])+";
 		fi
 		clear;
 		read -p "Do you wish to prefix this commit message with the pattern? (yes): " input_prefix_pattern;
@@ -114,7 +114,7 @@ write_json() {
   "SETTINGS": {
     "ISSUE_PATTERN": "'"$(escape_special_characters "$1")"'",
 	"ISSUE_PREFIX": "'"$2"'",
-    "USE_CONVENTIONAL_COMMITS": '$(escape_special_characters $3)'
+    "USE_CONVENTIONAL_COMMITS": '$3'
   }
 }
 '
