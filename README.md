@@ -104,7 +104,7 @@ For more details, please refer to the [Conventional Commits v1.0.0](https://www.
 
 ## License
 
-[To be filled with license information]
+No License.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
