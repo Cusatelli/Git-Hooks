@@ -10,6 +10,12 @@ ISSUE_PREFIX="";
 ISSUE_PATTERN="([#]*[\w]*[-]?[_]?[0-9])+";
 USE_CONVENTIONAL_COMMITS=false;
 
+clean() {
+	if [ $IS_DEBUG_MODE == false ]; then
+		clear;
+	fi;
+}
+
 print_character_slow() {
 	local input_string="$1"
 	local length=${#input_string}
@@ -17,77 +23,120 @@ print_character_slow() {
 	for ((i = 0; i < length; i++)); do
 		local character="${input_string:i:1}"
 		printf "$character"
-		sleep 0.005;
+		sleep 0.00001;
 	done
 }
 
 set_issue_pattern() {
 	ISSUE_PREFIX=""; # Reset
 
-	clear;
-	echo "What's the issue pattern used by your branches?";
-	echo "Example branch:"
-	printf "> ";
-	print_character_slow "42-the-answer-to-life" "";
+	clean;
+	print_character_slow "What's the issue pattern used by your branches?";
 	echo "";
-	read -p "Input your issue/branch pattern (#42): " input_issue_pattern;
-	if [ "$input_issue_pattern" != "" ]; then
-		echo "$input_issue_pattern"
-		start_position=$(echo "$input_issue_pattern" | grep -b -o '[0-9]' | head -n1 | cut -d ':' -f1);
-		end_position=$((start_position + 1));
-		
-		substring_before="${input_issue_pattern:0:end_position-1}";
-		substring_after="${input_issue_pattern:start_position}";
+	print_character_slow "Example branch:"
+	echo "";
+	print_character_slow "> 42-the-answer-to-life";
+	echo "";
+	echo "";
+	print_character_slow "Input your issue/branch pattern (#42): "
+	read -p "" input_issue_pattern;
+	if [ "$input_issue_pattern" == "" ]; then
+		return;
+	fi;
 
-		# Concatenate the substrings with the replacement
-		OUTPUT="((${substring_before})*[-]?[_]?[0-9])+";
-
-		PATTERN=[$(git rev-parse --abbrev-ref HEAD | grep -Eo $OUTPUT)];
-		echo "Example Commit Message:"
-		echo "> '$PATTERN This is a new Feature commit message.'";
-		sleep 1;
-
-		clear;
-		echo "Do you wish to prefix this pattern $PATTERN commit message with $substring_before?";
-		read -p "New pattern will be [$substring_before${PATTERN:1} (yes): " input_prefix_pattern;
-		if [ "$input_prefix_pattern" != "no" ]; then
-			ISSUE_PREFIX="$substring_before";
-		fi
-		PATTERN=[$ISSUE_PREFIX$(git rev-parse --abbrev-ref HEAD | grep -Eo $OUTPUT)];
-
-		clear;
-		echo "Issue number found from current branch: $PATTERN";
-		echo "Example Commit Message:"
-		echo "> '$PATTERN This is a new Feature commit message.'";
+	echo "$input_issue_pattern"
+	start_position=$(echo "$input_issue_pattern" | grep -b -o '[0-9]' | head -n1 | cut -d ':' -f1);
+	end_position=$((start_position + 1));
+	if [ $IS_DEBUG_MODE ]; then
+		echo "[DEBUG] positions=[$start_position, $end_position]";
+	fi;
+	
+	substring_before="${input_issue_pattern:0:end_position-1}";
+	substring_after="${input_issue_pattern:start_position}";
+	if [ $IS_DEBUG_MODE ]; then
+		printf '[DEBUG]
+	substring: {
+		before: '$substring_before',
+		after: '$substring_after'
+	};';
 		echo "";
-		sleep 1;
-		read -p "Are you happy with this pattern? (no): " input_is_happy;
-		if [ "$input_is_happy" != "yes" ]; then
-			clear;
-			set_issue_pattern;
-		fi
+	fi;
 
-		ISSUE_PATTERN=$OUTPUT;
+	# Concatenate the substrings with the replacement
+	OUTPUT="((${substring_before})*[-]?[_]?[0-9])+";
+
+	PATTERN=[$(git rev-parse --abbrev-ref HEAD | grep -Eo $OUTPUT)];
+	if [ $IS_DEBUG_MODE ]; then
+		echo "[DEBUG] PATTERN=\"$PATTERN\"";
+	fi;
+	echo "";
+	print_character_slow "Example Commit Message:"
+	echo "";
+	print_character_slow "> '$PATTERN This is a new Feature commit message.'";
+	sleep 1;
+
+	clean;
+	print_character_slow "Do you wish to prefix this pattern $PATTERN commit message with $substring_before?";
+	echo "";
+	print_character_slow "New pattern will be [$substring_before${PATTERN:1} (yes): "
+	read -p "" input_prefix_pattern;
+	if [ "$input_prefix_pattern" != "no" ]; then
+		ISSUE_PREFIX="$substring_before";
+		if [ $IS_DEBUG_MODE ]; then
+			echo "[DEBUG] Setting ISSUE_PREFIX=\"$substring_before\"";
+		fi;
 	fi
+	PATTERN=[$ISSUE_PREFIX$(git rev-parse --abbrev-ref HEAD | grep -Eo $OUTPUT)];
+	if [ $IS_DEBUG_MODE ]; then
+		echo "[DEBUG] PATTERN=\"$PATTERN\"";
+	fi;
+
+	clean;
+	print_character_slow "Issue number found from current branch: $PATTERN";
+	echo "";
+	print_character_slow "Example Commit Message:"
+	echo "";
+	print_character_slow "> '$PATTERN This is a new Feature commit message.'";
+	echo "";
+	echo "";
+	print_character_slow "Are you happy with this pattern? (no): ";
+	read -p "" input_is_happy;
+	if [ "$input_is_happy" != "yes" ]; then
+		clean;
+		set_issue_pattern;
+	fi
+
+	ISSUE_PATTERN=$OUTPUT;
 }
 
 set_use_conventional_commits() {
 	is_using_conv_commits=false;
-	clear;
-	read -p "Do you wish to use the Conventional Commits v1.0.0? (no): " input_use_conventional_commits;
+	clean;
+	print_character_slow "Do you wish to use the Conventional Commits v1.0.0? (no): "
+	read -p "" input_use_conventional_commits;
 	if [ "$input_use_conventional_commits" == "yes" ]; then
 		is_using_conv_commits=true;
-		echo "Example Commit Message:"
-		echo "> '$PATTERN feat: This is a new Feature commit message.'";
+		echo "";
+		print_character_slow "Example Commit Message:"
+		echo "";
+		print_character_slow "> '$PATTERN feat: This is a new Feature commit message.'";
 	else
 		is_using_conv_commits=false;
-		echo "Example Commit Message:";
-		echo "> '$PATTERN This is a new Feature commit message.'";
+		echo "";
+		print_character_slow "Example Commit Message:";
+		echo "";
+		print_character_slow "> '$PATTERN This is a new Feature commit message.'";
 	fi
 
-	read -p "Are you happy with this format? (no): " input_is_happy;
+	if [ $IS_DEBUG_MODE ]; then
+		echo "[DEBUG] is_using_conv_commits is set to \"$is_using_conv_commits\"";
+	fi;
+
+	echo "";
+	print_character_slow "Are you happy with this format? (no): "
+	read -p "" input_is_happy;
 	if [ "$input_is_happy" != "yes" ]; then
-		clear;
+		clean;
 		set_use_conventional_commits;
 	fi
 
@@ -121,7 +170,6 @@ write_json() {
 }
 '
 	if [ $IS_DEBUG_MODE ]; then
-		clear;
 		echo "$JSON_OBJECT";
 	fi;
 
@@ -132,5 +180,6 @@ set_issue_pattern;
 set_use_conventional_commits;
 write_json "$ISSUE_PATTERN" "$ISSUE_PREFIX" $USE_CONVENTIONAL_COMMITS;
 
-clear;
-read -p "Configuration Setup Complete!";
+clean;
+print_character_slow "Configuration Setup Complete!"
+read -p "";
