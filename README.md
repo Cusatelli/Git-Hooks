@@ -43,7 +43,26 @@ To install and use the Git-Hooks project, follow these steps:
 
 ## Usage
 
-[Instructions on how to use the Git-Hooks project]
+To use the Git Hooks solution, follow these steps:
+
+1. Navigate to the Git-Hooks directory:
+
+   Copy code
+
+   ```bash
+   cd Git-Hooks/src
+   ```
+
+2. Customize the hooks according to your requirements. Modify the scripts located in the src directory:
+   - **Create-PrepareCommitMessage.sh**: A script that sets up prepare-commit-msg to automatically prefix commits with the correct branch/ticket number and add commit types based on the staged items.
+   - **Set-Configuration.sh**: A script that configures Git-Hooks, including the issue pattern, issue prefix, and whether to use conventional commits.
+3. After customizing the hooks, run them in your project's directory.
+4. Open PowerShell and run `.\Set-Configuration.sh` to access the settings menu. Alternatively, you can edit the `settings.json` file directly if preferred.
+5. Once the configuration settings are complete, execute the `.\Create-PrepareCommitMessage.sh` script in PowerShell to automatically generate the prepare-commit-msg hook.
+6. The appropriate commands will be executed automatically to enable the configured functionality.
+7. You're all set! The Git hooks will now be triggered automatically when performing Git operations in your project.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
