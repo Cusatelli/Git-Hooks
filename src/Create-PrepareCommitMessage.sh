@@ -74,7 +74,7 @@ settings=$(cat "$settings_file")
 # Extract values using string manipulation
 ISSUE_PATTERN=$(grep -oP '(?<=ISSUE_PATTERN": ")[^"]*' <<< "$settings");
 ISSUE_PREFIX=$(grep -oP '(?<=ISSUE_PREFIX": ")[^"]*' <<< "$settings");
-USE_CONVENTIONAL_COMMITS=$(grep -oP '(?<=USE_CONVENTIONAL_COMMITS": ")[^"]*' <<< "$settings");
+USE_CONVENTIONAL_COMMITS=$(grep -oP '(?<=USE_CONVENTIONAL_COMMITS": )[^,}]*' <<< "$settings");
 
 echo "$ISSUE_PATTERN $ISSUE_PREFIX $USE_CONVENTIONAL_COMMITS";
 
@@ -98,7 +98,7 @@ STATUS=$(git status --short | grep ^[MARCD]);
 STAGED_STATUS_LOCATION=$(git status --short | grep ^[MARCD]);
 TYPE="";';
 
-if [[ "$USE_CONVENTIONAL_COMMITS" == "true" ]]; then
+if [[ $USE_CONVENTIONAL_COMMITS == true ]]; then
 	SCRIPT+='
 if [[ $TICKET == "[]" || "$MESSAGE" == "$TICKET"* ]]; then
 	exit 0;
