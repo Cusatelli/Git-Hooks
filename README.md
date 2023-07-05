@@ -20,13 +20,17 @@ The Git-Hooks project aims to provide a solution for automating certain tasks in
 
 The main purpose of this project is to enable automatic prefixing of commit messages with the correct branch or ticket number. Additionally, it attempts to add commit types such as `feat`, `refactor`, `fix`, or `chore` based on the first entry of the staged items. The commit message format follows the guidelines of the **Conventional Commits v1.0.0** specification, which can be found at [https://www.conventionalcommits.org/en/v1.0.0/#summary](https://www.conventionalcommits.org/en/v1.0.0/#summary).
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">
+	<a href="#top" style="font-size:2rem;color:#aac5c0;">▲</a>
+</p>
 
 ## Build & Deploy
 
 [To be filled with build and deployment instructions]
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">
+	<a href="#top" style="font-size:2rem;color:#aac5c0;">▲</a>
+</p>
 
 ## Install
 
@@ -39,7 +43,9 @@ To install and use the Git-Hooks project, follow these steps:
    ```
 2. [Additional installation instructions if needed]
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">
+	<a href="#top" style="font-size:2rem;color:#aac5c0;">▲</a>
+</p>
 
 ## Usage
 
@@ -62,21 +68,29 @@ To use the Git Hooks solution, follow these steps:
 6. The appropriate commands will be executed automatically to enable the configured functionality.
 7. You're all set! The Git hooks will now be triggered automatically when performing Git operations in your project.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">
+	<a href="#top" style="font-size:2rem;color:#aac5c0;">▲</a>
+</p>
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">
+	<a href="#top" style="font-size:2rem;color:#aac5c0;">▲</a>
+</p>
 
 ## Maintainers
 
 [To be filled with maintainers' information]
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">
+	<a href="#top" style="font-size:2rem;color:#aac5c0;">▲</a>
+</p>
 
 ## Contributing
 
 Contributions to the Git-Hooks project are welcome. If you would like to contribute, please contact [@Cusatelli](https://github.com/Cusatelli) for more information.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">
+	<a href="#top" style="font-size:2rem;color:#aac5c0;">▲</a>
+</p>
 
 ## Conventions
 
@@ -100,16 +114,22 @@ The following commit types are used:
 
 For more details, please refer to the [Conventional Commits v1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">
+	<a href="#top" style="font-size:2rem;color:#aac5c0;">▲</a>
+</p>
 
 ## License
 
 No License.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">
+	<a href="#top" style="font-size:2rem;color:#aac5c0;">▲</a>
+</p>
 
 ## Contact
 
 For any inquiries or questions, please contact Cusatelli at [github.cusatelli@gmail.com](mailto:github.cusatelli@gmail.com).
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">
+	<a href="#top" style="font-size:2rem;color:#aac5c0;">▲</a>
+</p>
