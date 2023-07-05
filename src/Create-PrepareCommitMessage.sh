@@ -77,7 +77,6 @@ ISSUE_PREFIX=$(grep -oP '(?<=ISSUE_PREFIX": ")[^"]*' <<< "$settings");
 USE_CONVENTIONAL_COMMITS=$(grep -oP '(?<=USE_CONVENTIONAL_COMMITS": )[^,}]*' <<< "$settings");
 
 echo "$ISSUE_PATTERN $ISSUE_PREFIX $USE_CONVENTIONAL_COMMITS";
-
 echo_loop "Writing bash-script to newly created $FILE_NAME file" $SLEEP_TIME_DOTS "1 2 3";
 SCRIPT='#!/bin/bash
 
@@ -92,8 +91,7 @@ echo "$ISSUE_PATTERN";
 TICKET=[';
 SCRIPT+="$ISSUE_PREFIX";
 SCRIPT+='$(git rev-parse --abbrev-ref HEAD | grep -Eo ';
-SCRIPT+='"'$ISSUE_PATTERN'"';
-SCRIPT+=' | grep -Eo "(\\w+[-])?[0-9]+")];
+SCRIPT+='"'$ISSUE_PATTERN'")];
 STATUS=$(git status --short | grep ^[MARCD]);
 STAGED_STATUS_LOCATION=$(git status --short | grep ^[MARCD]);
 TYPE="";';
@@ -105,27 +103,27 @@ if [[ $TICKET == "[]" || "$MESSAGE" == "$TICKET"* ]]; then
 fi;
 
 if [[ "${STAGED_STATUS_LOCATION:3:6}" == *"tests/"* ]]; then
-	TYPE="test";
+	TYPE=" test";
 elif [[ "${STAGED_STATUS_LOCATION:3:14}" == *"documentation/"* ]]; then
-	TYPE="docs";
+	TYPE=" docs";
 else
 	# Just grab the first staged file and check if refactor, feat, chore, docs etc.
 	# this needs to be refined later, but it will suffice for now:
 	if [[ "${STATUS:0:1}" == "A" ]]; then
-		TYPE="feat";
+		TYPE=" feat";
 	elif [[ "${STATUS:0:1}" == "M" ]]; then
-		TYPE="refactor";
+		TYPE=" refactor";
 	elif [[ "${STATUS:0:1}" == "C" ]]; then
-		TYPE="fix";
+		TYPE=" fix";
 	elif [[ "${STATUS:0:1}" == "R" ]]; then
-		TYPE="chore";
+		TYPE=" chore";
 	fi;
 fi;
 ';
 fi;
 
 SCRIPT+='
-echo "$TICKET $TYPE: $MESSAGE" > $FILE;
+echo "$TICKET$TYPE: $MESSAGE" > $FILE;
 exit 0;
 ';
 
