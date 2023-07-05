@@ -24,7 +24,7 @@ print_character_slow() {
 set_issue_pattern() {
 	ISSUE_PREFIX=""; # Reset
 
-	# clear;
+	clear;
 	echo "What's the issue pattern used by your branches?";
 	echo "Example branch:"
 	printf "> ";
@@ -47,12 +47,7 @@ set_issue_pattern() {
 		echo "> '$PATTERN This is a new Feature commit message.'";
 		sleep 1;
 
-		# clear;
-		# read -p "Is the key of the ticket always $substring_before? (yes): " input_always_same_key;
-		# if [ "$input_always_same_key" == "no" ]; then
-		# 	OUTPUT="([#]*[\w]*[-]?[_]?[0-9])+";
-		# fi
-		# clear;
+		clear;
 		echo "Do you wish to prefix this pattern $PATTERN commit message with $substring_before?";
 		read -p "New pattern will be [$substring_before${PATTERN:1} (yes): " input_prefix_pattern;
 		if [ "$input_prefix_pattern" != "no" ]; then
@@ -60,7 +55,7 @@ set_issue_pattern() {
 		fi
 		PATTERN=[$ISSUE_PREFIX$(git rev-parse --abbrev-ref HEAD | grep -Eo $OUTPUT)];
 
-		# clear;
+		clear;
 		echo "Issue number found from current branch: $PATTERN";
 		echo "Example Commit Message:"
 		echo "> '$PATTERN This is a new Feature commit message.'";
@@ -68,7 +63,7 @@ set_issue_pattern() {
 		sleep 1;
 		read -p "Are you happy with this pattern? (no): " input_is_happy;
 		if [ "$input_is_happy" != "yes" ]; then
-			# clear;
+			clear;
 			set_issue_pattern;
 		fi
 
@@ -78,7 +73,7 @@ set_issue_pattern() {
 
 set_use_conventional_commits() {
 	is_using_conv_commits=false;
-	# clear;
+	clear;
 	read -p "Do you wish to use the Conventional Commits v1.0.0? (no): " input_use_conventional_commits;
 	if [ "$input_use_conventional_commits" == "yes" ]; then
 		is_using_conv_commits=true;
@@ -92,7 +87,7 @@ set_use_conventional_commits() {
 
 	read -p "Are you happy with this format? (no): " input_is_happy;
 	if [ "$input_is_happy" != "yes" ]; then
-		# clear;
+		clear;
 		set_use_conventional_commits;
 	fi
 
@@ -126,7 +121,7 @@ write_json() {
 }
 '
 	if [ $IS_DEBUG_MODE ]; then
-		# clear;
+		clear;
 		echo "$JSON_OBJECT";
 	fi;
 

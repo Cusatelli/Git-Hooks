@@ -28,24 +28,24 @@ echo_loop() {
 	do
 		echo "$1";
 		sleep $2;
-		# clear;
+		clear;
 		echo "$1.";
 		sleep $2;
-		# clear;
+		clear;
 		echo "$1..";
 		sleep $2;
-		# clear;
+		clear;
 		echo "$1...";
 		sleep $2;
-		# clear;
+		clear;
 	done
 }
 
-# clear;
+clear;
 echo "Navigating to $GIT_HOOKS_DIRECTORY directory.";
 cd $GIT_HOOKS_DIRECTORY
 
-# clear;
+clear;
 if [ -e "$FILE_NAME" ]; then
     echo "File: "$FILE_NAME" already exists.";
 	read -p "Would you like to override contents of file? (no): " INPUT_OVERRIDE_CONTENT;
@@ -61,7 +61,7 @@ else
 fi
 
 # Write the bash script to the new file. (To read it replace surrounding quotes and all "\n" with "new lines" in vs-code)
-# clear;
+clear;
 
 # Read the JSON file content
 # Get the directory path of the script
@@ -133,11 +133,11 @@ read -p "Press 'Enter' to continue...";
 
 # Initialize the file so git can use it to prefix git commit messages.
 # If this isn't done it won't do anything.
-# clear;
+clear;
 echo_loop "Initialize file with chmod +x so it can be used to prefix commit messages" $SLEEP_TIME_DOTS "1 2";
 chmod +x ./$FILE_NAME;
 sleep 1;
 
-# clear;
+clear;
 echo "Automatic Issue Tagging has been successfuly enabled for this project!";
 func_exit;
