@@ -169,6 +169,24 @@ write_json() {
   }
 }
 '
+
+	if [ -e "$FILE_NAME" ]; then
+		print_character_slow "File: "$FILE_NAME" already exists.";
+		echo "";
+		print_character_slow "Would you like to override contents of file? (no): ";
+		read -p "" INPUT_OVERRIDE_CONTENT;
+		if [ "$INPUT_OVERRIDE_CONTENT" != "yes" ]; then
+			func_exit;
+			exit 0;
+		fi
+	else
+		# Create File in .git hooks directory
+		print_character_slow "File does not exist. Creating $FILE_NAME" $SLEEP_TIME_DOTS "1";
+		touch "$FILE_NAME";
+		echo "";
+		print_character_slow "File: $FILE_NAME created.";
+	fi
+
 	if [ $IS_DEBUG_MODE ]; then
 		echo "$JSON_OBJECT";
 	fi;
